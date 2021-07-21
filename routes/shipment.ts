@@ -7,6 +7,10 @@ const shipment = new ShipmentController()
 
 router.post('/create', shipment.create)
 
+router.post('/edit', shipment.editShipment)
+
+router.get('/:id', shipment.getShipment)
+
 router.get('/', shipment.getAllShipments)
 
 export default router

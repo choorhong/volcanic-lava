@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import { getShipments, createShipment } from '../services/shipment'
+import { getShipments, createShipment, getShipment, editShipmentByid } from '../services/shipment'
 import { BaseController } from './base'
 import mongoose from 'mongoose'
 
-export default class BookingController extends BaseController {
+export default class ShipmentController extends BaseController {
   public getAllShipments = async (req: Request, res: Response) => {
     try {
       const shipments = await getShipments()
@@ -14,19 +14,48 @@ export default class BookingController extends BaseController {
     }
   }
 
+  public getShipment = async (req: Request, res: Response) => {
+    const { id } = req.params
+    try {
+      const shipment = await getShipment(id)
+      return this.ok(res, shipment)
+    } catch (error) {
+      console.log('Error', error)
+      return this.internalServerError(res)
+    }
+  }
+
+  public editShipment = async (req: Request, res: Response) => {
+    const { id } = req.query as { id : string }
+    // validation first....
+
+    // edit shipments
+    try {
+      const values = req.body
+      const shipmentData = {
+        ...req.body,
+        purchaseOrderNo: new mongoose.mongo.ObjectID(values.purchaseOrderNo),
+        bookingNo: new mongoose.mongo.ObjectID(values.bookingNo)
+      }
+
+      const result = await editShipmentByid(id, shipmentData)
+      return this.ok(res, result)
+    } catch (createError) {
+      return this.internalServerError(res)
+    }
+  }
+
   public create = async (req: Request, res: Response) => {
     // validation first....
 
     // create shipments
     try {
       const values = req.body
-      console.log('values', values)
       const shipmentData = {
         ...req.body,
         purchaseOrderNo: new mongoose.mongo.ObjectID(values.purchaseOrderNo),
         bookingNo: new mongoose.mongo.ObjectID(values.bookingNo)
       }
-      console.log('shipments', shipmentData)
 
       const result = await createShipment(shipmentData)
       return this.ok(res, result)
