@@ -1,4 +1,4 @@
-# Getting Started with MERN_TODO_BACKEND
+# Getting Started Guide
 
 ## Setup env file
 Create a .env file in the root directory and placed the following variables in the file.
