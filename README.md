@@ -32,7 +32,7 @@ Services should contain most of the db logic/query and if best should be reusabl
 Enums, interfaces, and types should be defined in `/types` directory.
 
 ## Tools
-Database Tool: Any mongodb GUI, recommended [MongoDB Compass]().
+Database Tool: Any mongodb GUI, recommended [MongoDB Compass](https://www.mongodb.com/products/compass).
 
 ## Production setup
 To be changed.
