@@ -9,6 +9,8 @@ router.post('/create', shipment.create)
 
 router.post('/edit', shipment.editShipment)
 
+router.delete('/delete', shipment.deleteShipment)
+
 router.get('/:id', shipment.getShipment)
 
 router.get('/', shipment.getAllShipments)

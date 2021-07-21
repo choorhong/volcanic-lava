@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getShipments, createShipment, getShipment, editShipmentByid } from '../services/shipment'
+import { getShipments, createShipment, getShipment, editShipmentById, deleteShipmentById } from '../services/shipment'
 import { BaseController } from './base'
 import mongoose from 'mongoose'
 
@@ -38,7 +38,7 @@ export default class ShipmentController extends BaseController {
         bookingNo: new mongoose.mongo.ObjectID(values.bookingNo)
       }
 
-      const result = await editShipmentByid(id, shipmentData)
+      const result = await editShipmentById(id, shipmentData)
       return this.ok(res, result)
     } catch (createError) {
       return this.internalServerError(res)
@@ -58,6 +58,16 @@ export default class ShipmentController extends BaseController {
       }
 
       const result = await createShipment(shipmentData)
+      return this.ok(res, result)
+    } catch (createError) {
+      return this.internalServerError(res)
+    }
+  }
+
+  public deleteShipment = async (req: Request, res: Response) => {
+    const { id } = req.query as { id : string }
+    try {
+      const result = await deleteShipmentById(id)
       return this.ok(res, result)
     } catch (createError) {
       return this.internalServerError(res)

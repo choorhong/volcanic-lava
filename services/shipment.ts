@@ -7,4 +7,6 @@ export const getShipment = (id: string, projection: Record<string, any> = {}, op
 
 export const getShipments = () => Shipment.find().populate('purchaseOrderNo').populate('bookingNo')
 
-export const editShipmentByid = (id: string, update: UpdateQuery<any> | UpdateWithAggregationPipeline, options: QueryOptions | null = null) => Shipment.findByIdAndUpdate(id, update, { ...options, new: true })
+export const editShipmentById = (id: string, update: UpdateQuery<any> | UpdateWithAggregationPipeline, options: QueryOptions | null = null) => Shipment.findByIdAndUpdate(id, update, { ...options, new: true })
+
+export const deleteShipmentById = (id: string, options: QueryOptions | null = null) => Shipment.findByIdAndDelete(id, options)
