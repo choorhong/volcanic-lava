@@ -12,8 +12,12 @@ export const getBooking = (bookingNo: string, projection: Record<string, any> = 
 
 export const searchBookings = async (bookingNo: string, projection: Record<string, any> = { bookingNo: 1 }, sort = {}, limit = 3) => {
   return Booking.find(
-    { $text: { $search: bookingNo } },
+    { bookingNo: { $regex: new RegExp(bookingNo) } },
     { score: { $meta: 'textScore' }, ...projection },
     { sort, limit }
-  ).sort({ score: { $meta: 'textScore' } })
+  )
+  //   { $text: { $search: new RegExp(bookingNo) } },
+  //   { score: { $meta: 'textScore' }, ...projection },
+  //   { sort, limit }
+  // ).sort({ score: { $meta: 'textScore' } })
 }
