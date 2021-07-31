@@ -11,10 +11,10 @@ export const getPO = (purchaseOrderNo: string, projection: Record<string, any> =
 
 export const searchPOs = async (purchaseOrderNo: string, projection: Record<string, any> = { purchaseOrderNo: 1 }, sort = {}, limit = 3) => {
   return PurchaseOrder.find(
-    { purchaseOrderNo: { $regex: new RegExp(purchaseOrderNo) } },
-    { score: { $meta: 'textScore' }, ...projection },
-    { sort, limit }
-  ).sort({ score: { $meta: 'textScore' } })
+    { purchaseOrderNo: { $regex: new RegExp(purchaseOrderNo) } }
+    // { score: { $meta: 'textScore' }, ...projection },
+    // { sort, limit }
+  )
   //   { $text: { $search: purchaseOrderNo } },
   //   { score: { $meta: 'textScore' }, ...projection },
   //   { sort, limit }
