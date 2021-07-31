@@ -15,7 +15,7 @@ export const searchBookings = async (bookingNo: string, projection: Record<strin
     { bookingNo: { $regex: new RegExp(bookingNo) } },
     { score: { $meta: 'textScore' }, ...projection },
     { sort, limit }
-  )
+  ).sort({ score: { $meta: 'textScore' } })
   //   { $text: { $search: new RegExp(bookingNo) } },
   //   { score: { $meta: 'textScore' }, ...projection },
   //   { sort, limit }

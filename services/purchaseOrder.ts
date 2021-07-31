@@ -14,7 +14,7 @@ export const searchPOs = async (purchaseOrderNo: string, projection: Record<stri
     { purchaseOrderNo: { $regex: new RegExp(purchaseOrderNo) } },
     { score: { $meta: 'textScore' }, ...projection },
     { sort, limit }
-  )
+  ).sort({ score: { $meta: 'textScore' } })
   //   { $text: { $search: purchaseOrderNo } },
   //   { score: { $meta: 'textScore' }, ...projection },
   //   { sort, limit }
